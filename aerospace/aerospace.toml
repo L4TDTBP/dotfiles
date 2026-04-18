@@ -1,0 +1,177 @@
+# Aerospace config
+# Tiled layout with accordion stacking, named workspaces
+
+config-version = 2
+
+# --- Startup Settings ---
+start-at-login = true
+after-startup-command = ['exec-and-forget sketchybar']
+
+# --- Base Settings ---
+
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+
+default-root-container-layout = 'accordion'
+default-root-container-orientation = 'auto' # Let it 'auto', it's good
+
+# Notify Sketchybar about workspace change
+exec-on-workspace-change = [
+  '/bin/bash', '-c', '/opt/homebrew/bin/sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
+]
+
+
+accordion-padding = 0
+
+# --- Main Mode ---
+[mode.main.binding]
+
+alt-slash = 'layout tiles horizontal vertical'
+alt-comma = 'layout accordion horizontal vertical'
+
+alt-t = 'workspace T'
+alt-p = 'workspace P'
+alt-c = 'workspace C'
+alt-w = 'workspace W'
+alt-s = 'workspace S'
+alt-b = 'workspace B'
+alt-m = 'workspace M'
+alt-f = 'workspace F'
+
+alt-h = 'focus left'
+alt-j = 'focus down'
+alt-k = 'focus up'
+alt-l = 'focus right'
+
+alt-o = 'focus-back-and-forth'
+
+ctrl-h = 'move left'
+ctrl-j = 'move down'
+ctrl-k = 'move up'
+ctrl-l = 'move right'
+
+alt-shift-minus = 'resize smart -50'
+alt-shift-equal = 'resize smart +50'
+
+alt-tab = 'workspace-back-and-forth'
+
+alt-shift-comma = 'mode service'
+
+[mode.service.binding]
+esc = ['reload-config', 'mode main']
+r = ['flatten-workspace-tree', 'mode main'] # Reset Layout
+f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
+backspace = ['close-all-windows-but-current', 'mode main']
+
+# --- Gaps ---
+[gaps]
+outer.top = [
+  { monitor."built-in" = 10 }, # MacBook Built-In (Laptop Monitor)
+  { monitor.main = 40 }, # Sketchy Bar
+ 40 
+]
+
+# --- Rules ---
+[[on-window-detected]]
+if.app-id = 'net.kovidgoyal.kitty'
+run = 'move-node-to-workspace T'
+
+[[on-window-detected]]
+if.app-id = 'net.whatsapp.WhatsApp'
+run = 'move-node-to-workspace P'
+
+[[on-window-detected]]
+if.app-id = 'com.brave.Browser.app.ilbcbhpbmggihnbldpmmbppiclfnifck'
+run = 'move-node-to-workspace P'
+
+[[on-window-detected]]
+if.app-id = 'com.brave.Browser'
+if.window-title-regex-substring = 'Privat'
+run = 'move-node-to-workspace P'
+
+[[on-window-detected]]
+if.app-id = 'com.brave.Browser'
+if.window-title-regex-substring = 'FFHS | User'
+run = 'move-node-to-workspace F'
+
+[[on-window-detected]]
+if.app-id = 'com.brave.Browser'
+if.window-title-regex-substring = 'BFH | User'
+run = 'move-node-to-workspace B'
+
+[[on-window-detected]]
+if.app-id = 'com.brave.Browser'
+if.window-title-regex-substring = 'BFH | Admin'
+run = 'move-node-to-workspace B'
+
+[[on-window-detected]]
+if.app-id = 'com.brave.Browser'
+if.window-title-regex-substring = 'BFH-DEV | User'
+run = 'move-node-to-workspace B'
+
+[[on-window-detected]]
+if.app-id = 'com.brave.Browser'
+if.window-title-regex-substring = 'BFH-DEV | Admin'
+run = 'move-node-to-workspace B'
+
+[[on-window-detected]]
+if.app-id = 'com.brave.Browser'
+if.window-title-regex-substring = 'SSC | User'
+run = 'move-node-to-workspace S'
+
+[[on-window-detected]]
+if.app-id = 'com.brave.Browser'
+if.window-title-regex-substring = 'SSC | Admin'
+run = 'move-node-to-workspace S'
+
+[[on-window-detected]]
+if.app-id = 'com.brave.Browser'
+if.window-title-regex-substring = 'SSCDEV | Admin'
+run = 'move-node-to-workspace S'
+
+[[on-window-detected]]
+if.app-id = 'com.brave.Browser'
+if.window-title-regex-substring = 'FF | Admin'
+run = 'move-node-to-workspace W'
+
+[[on-window-detected]]
+if.app-id = 'com.brave.Browser'
+if.window-title-regex-substring = 'CP | Admin'
+run = 'move-node-to-workspace W'
+
+[[on-window-detected]]
+if.app-id = 'com.brave.Browser'
+if.window-title-regex-substring = 'A&O | Admin'
+run = 'move-node-to-workspace W'
+
+[[on-window-detected]]
+if.app-id = 'com.brave.Browser'
+if.window-title-regex-substring = 'TVG | Admin'
+run = 'move-node-to-workspace W'
+
+[[on-window-detected]]
+if.app-id = 'com.brave.Browser'
+if.window-title-regex-substring = 'TVG | Poweruser'
+run = 'move-node-to-workspace W'
+
+[[on-window-detected]]
+if.app-id = 'com.brave.Browser'
+if.window-title-regex-substring = 'TVG | ServiceAccount'
+run = 'move-node-to-workspace W'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+run = 'move-node-to-workspace M'
+
+[[on-window-detected]]
+if.app-id = 'com.microsoft.teams2'
+run = 'move-node-to-workspace C'
+
+[[on-window-detected]]
+if.app-id = 'com.microsoft.Outlook'
+run = 'move-node-to-workspace C'
+
+# Open all the rest in Work (W)
+[[on-window-detected]]
+if.app-name-regex-substring = '^.*$'
+run = 'move-node-to-workspace W'

@@ -31,10 +31,6 @@ return {
 				},
 				lualine_x = {
 					{
-						"filetype",
-						icon_only = true,
-					},
-					{
 						function()
 							local clients = vim.lsp.get_clients({ bufnr = 0 })
 							if #clients == 0 then
@@ -44,8 +40,12 @@ return {
 							for _, client in ipairs(clients) do
 								table.insert(names, client.name)
 							end
-							return table.concat(names, ", ")
+							return "􀥎  " .. table.concat(names, ", ")
 						end,
+					},
+					{
+						"filetype",
+						icon_only = true,
 					},
 				},
 				lualine_y = {},

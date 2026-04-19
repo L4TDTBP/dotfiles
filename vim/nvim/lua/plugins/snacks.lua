@@ -9,9 +9,6 @@ return {
 			picker = {
 				enabled = true,
 			},
-			lazygit = {
-				enabled = true,
-			},
 		})
 
 		-- keymaps für picker
@@ -36,10 +33,5 @@ return {
 		vim.keymap.set("n", "<leader>fd", function()
 			snacks.picker.diagnostics()
 		end, { desc = "find diagnostics" })
-
-		-- lazygit
-		vim.keymap.set("n", "<leader>lg", function()
-			snacks.lazygit()
-		end, { desc = "lazygit" })
 	end,
 }

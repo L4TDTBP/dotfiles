@@ -1,37 +1,26 @@
 return {
 	"nvim-treesitter/nvim-treesitter-textobjects",
+	branch = "main",
 	event = { "BufReadPost", "BufNewFile" },
 	dependencies = { "nvim-treesitter/nvim-treesitter" },
 	config = function()
-		require("nvim-treesitter.configs").setup({
-			textobjects = {
-				-- select code-blocks
-				select = {
-					enable = true,
-					lookahead = true,
-					keymaps = {
-						["af"] = { query = "@function.outer", desc = "around function" },
-						["if"] = { query = "@function.inner", desc = "inner function" },
-						["ac"] = { query = "@class.outer", desc = "around class" },
-						["ic"] = { query = "@class.inner", desc = "inner class" },
-						["aa"] = { query = "@parameter.outer", desc = "around argument" },
-						["ia"] = { query = "@parameter.innter", desc = "inner argument" },
-					},
-				},
-				-- navigate to code-blocks
-				move = {
-					enable = true,
-					set_jumps = true,
-					goto_next_start = {
-						["gnm"] = { query = "@function.outer", desc = "next method start" },
-						["gnc"] = { query = "@class.outer", desc = "next class start" },
-					},
-					goto_previous_start = {
-						["gpm"] = { query = "@function.outer", desc = "previous method start" },
-						["gpc"] = { query = "@class.outer", desc = "previous class start" },
-					},
-				},
+		require("nvim-treesitter-textobjects").setup({
+			move = {
+				set_jumps = true,
 			},
 		})
+
+		vim.keymap.set({ "n", "x", "o" }, "gnm", function()
+			require("nvim-treesitter-textobjects.move").goto_next_start("@function.outer", "textobjects")
+		end, { desc = "next method start" })
+		vim.keymap.set({ "n", "x", "o" }, "gnc", function()
+			require("nvim-treesitter-textobjects.move").goto_next_start("@class.outer", "textobjects")
+		end, { desc = "next class start" })
+		vim.keymap.set({ "n", "x", "o" }, "gpm", function()
+			require("nvim-treesitter-textobjects.move").goto_previous_start("@function.outer", "textobjects")
+		end, { desc = "previous method start" })
+		vim.keymap.set({ "n", "x", "o" }, "gpc", function()
+			require("nvim-treesitter-textobjects.move").goto_previous_start("@class.outer", "textobjects")
+		end, { desc = "previous class start" })
 	end,
 }

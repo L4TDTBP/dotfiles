@@ -26,11 +26,15 @@ return {
 				},
 			})
 
-			local lspconfig = require("lspconfig")
+			-- LSP using default config
+			vim.lsp.enable("ts_ls")
+			vim.lsp.enable("html")
+			vim.lsp.enable("cssls")
+			vim.lsp.enable("jsonls")
+			vim.lsp.enable("yamlls")
 
-			lspconfig.ts_ls.setup({})
-
-			lspconfig.lua_ls.setup({
+			-- Lua_LS using custom config
+			vim.lsp.config("lua_ls", {
 				settings = {
 					Lua = {
 						diagnostics = {
@@ -39,14 +43,13 @@ return {
 					},
 				},
 			})
+			vim.lsp.enable("lua_ls")
 
-			lspconfig.html.setup({})
-			lspconfig.cssls.setup({})
-			lspconfig.jsonls.setup({})
-			lspconfig.yamlls.setup({})
-			lspconfig.powershell_es.setup({
+			-- PS LS using custom config
+			vim.lsp.config("powershell_es", {
 				bundle_path = vim.fn.stdpath("data") .. "/mason/packages/powershell-editor-services",
 			})
+			vim.lsp.enable("powershell_es")
 
 			vim.api.nvim_create_autocmd("LspAttach", {
 				callback = function(args)
@@ -100,18 +103,12 @@ return {
 						vim.diagnostic.open_float,
 						{ buffer = args.buf, desc = "show diagnostic" }
 					)
-					vim.keymap.set(
-						"n",
-						"gnd",
-						vim.diagnostic.goto_next,
-						{ buffer = args.buf, desc = "go to next diagnostic" }
-					)
-					vim.keymap.set(
-						"n",
-						"gpd",
-						vim.diagnostic.goto_prev,
-						{ buffer = args.buf, desc = "go to previous diagnostic" }
-					)
+					vim.keymap.set("n", "gnd", function()
+						vim.diagnostic.jump({ count = 1 })
+					end, { buffer = args.buf, desc = "go to next diagnostic" })
+					vim.keymap.set("n", "gpd", function()
+						vim.diagnostic.jump({ count = -1 })
+					end, { buffer = args.buf, desc = "go to previous diagnostic" })
 				end,
 			})
 		end,

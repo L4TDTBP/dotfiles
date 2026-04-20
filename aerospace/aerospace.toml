@@ -20,7 +20,6 @@ exec-on-workspace-change = [
   '/bin/bash', '-c', '/opt/homebrew/bin/sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
 ]
 
-
 accordion-padding = 0
 
 # --- Main Mode ---
@@ -55,6 +54,15 @@ alt-shift-equal = 'resize smart +50'
 
 alt-tab = 'workspace-back-and-forth'
 
+alt-shift-t = ['move-node-to-workspace T', 'workspace T']
+alt-shift-p = ['move-node-to-workspace P', 'workspace P']
+alt-shift-c = ['move-node-to-workspace C', 'workspace C']
+alt-shift-w = ['move-node-to-workspace W', 'workspace W']
+alt-shift-s = ['move-node-to-workspace S', 'workspace S']
+alt-shift-b = ['move-node-to-workspace B', 'workspace B']
+alt-shift-m = ['move-node-to-workspace M', 'workspace M']
+alt-shift-f = ['move-node-to-workspace F', 'workspace F']
+
 alt-shift-comma = 'mode service'
 
 [mode.service.binding]
@@ -72,6 +80,12 @@ outer.top = [
 ]
 
 # --- Rules ---
+# Dialog, should be floating
+[[on-window-detected]]
+if.app-id = 'com.microsoft.StorageExplorer'
+run = ['layout floating', 'move-node-to-workspace W']
+
+# Normal Rules
 [[on-window-detected]]
 if.app-id = 'net.kovidgoyal.kitty'
 run = 'move-node-to-workspace T'
@@ -89,74 +103,75 @@ if.app-id = 'com.brave.Browser'
 if.window-title-regex-substring = 'Privat'
 run = 'move-node-to-workspace P'
 
+
 [[on-window-detected]]
 if.app-id = 'com.brave.Browser'
-if.window-title-regex-substring = 'FFHS | User'
+if.window-title-regex-substring = 'BFH \| User'
+run = 'move-node-to-workspace B'
+
+[[on-window-detected]]
+if.app-id = 'com.brave.Browser'
+if.window-title-regex-substring = 'BFH \| Admin'
+run = 'move-node-to-workspace B'
+
+[[on-window-detected]]
+if.app-id = 'com.brave.Browser'
+if.window-title-regex-substring = 'FFHS \| User'
 run = 'move-node-to-workspace F'
 
 [[on-window-detected]]
 if.app-id = 'com.brave.Browser'
-if.window-title-regex-substring = 'BFH | User'
+if.window-title-regex-substring = 'BFH-DEV \| User'
 run = 'move-node-to-workspace B'
 
 [[on-window-detected]]
 if.app-id = 'com.brave.Browser'
-if.window-title-regex-substring = 'BFH | Admin'
+if.window-title-regex-substring = 'BFH-DEV \| Admin'
 run = 'move-node-to-workspace B'
 
 [[on-window-detected]]
 if.app-id = 'com.brave.Browser'
-if.window-title-regex-substring = 'BFH-DEV | User'
-run = 'move-node-to-workspace B'
-
-[[on-window-detected]]
-if.app-id = 'com.brave.Browser'
-if.window-title-regex-substring = 'BFH-DEV | Admin'
-run = 'move-node-to-workspace B'
-
-[[on-window-detected]]
-if.app-id = 'com.brave.Browser'
-if.window-title-regex-substring = 'SSC | User'
+if.window-title-regex-substring = 'SSC \| User'
 run = 'move-node-to-workspace S'
 
 [[on-window-detected]]
 if.app-id = 'com.brave.Browser'
-if.window-title-regex-substring = 'SSC | Admin'
+if.window-title-regex-substring = 'SSC \| Admin'
 run = 'move-node-to-workspace S'
 
 [[on-window-detected]]
 if.app-id = 'com.brave.Browser'
-if.window-title-regex-substring = 'SSCDEV | Admin'
+if.window-title-regex-substring = 'SSCDEV \| Admin'
 run = 'move-node-to-workspace S'
 
 [[on-window-detected]]
 if.app-id = 'com.brave.Browser'
-if.window-title-regex-substring = 'FF | Admin'
+if.window-title-regex-substring = 'FF \| Admin'
 run = 'move-node-to-workspace W'
 
 [[on-window-detected]]
 if.app-id = 'com.brave.Browser'
-if.window-title-regex-substring = 'CP | Admin'
+if.window-title-regex-substring = 'CP \| Admin'
 run = 'move-node-to-workspace W'
 
 [[on-window-detected]]
 if.app-id = 'com.brave.Browser'
-if.window-title-regex-substring = 'A&O | Admin'
+if.window-title-regex-substring = 'A&O \| Admin'
 run = 'move-node-to-workspace W'
 
 [[on-window-detected]]
 if.app-id = 'com.brave.Browser'
-if.window-title-regex-substring = 'TVG | Admin'
+if.window-title-regex-substring = 'TVG \| Admin'
 run = 'move-node-to-workspace W'
 
 [[on-window-detected]]
 if.app-id = 'com.brave.Browser'
-if.window-title-regex-substring = 'TVG | Poweruser'
+if.window-title-regex-substring = 'TVG \| Poweruser'
 run = 'move-node-to-workspace W'
 
 [[on-window-detected]]
 if.app-id = 'com.brave.Browser'
-if.window-title-regex-substring = 'TVG | ServiceAccount'
+if.window-title-regex-substring = 'TVG \| ServiceAccount'
 run = 'move-node-to-workspace W'
 
 [[on-window-detected]]

@@ -44,10 +44,10 @@ alt-l = 'focus right'
 
 alt-o = 'focus-back-and-forth'
 
-ctrl-h = 'move left'
-ctrl-j = 'move down'
-ctrl-k = 'move up'
-ctrl-l = 'move right'
+alt-left = 'move left'
+alt-down = 'move down'
+alt-up = 'move up'
+alt-right = 'move right'
 
 alt-shift-minus = 'resize smart -50'
 alt-shift-equal = 'resize smart +50'

@@ -36,6 +36,9 @@ map.set({ "n", "v" }, "B", "%", { noremap = true, desc = "go to matching bracet"
 map.set("n", "<D-s>", ":w<CR>", { noremap = true, desc = "save file" })
 map.set("i", "<D-s>", "<Esc>:w<CR>", { noremap = true, desc = "save file" })
 
+-- clear search highlights on Esc
+vim.keymap.set("n", "<Esc>", "<cmd>noh<cr><Esc>")
+
 -- navigation --
 ----------------
 -- paragraph navigation

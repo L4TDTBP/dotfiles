@@ -8,6 +8,7 @@ return {
 		snacks.setup({
 			picker = {
 				enabled = true,
+				main = { current = true },
 			},
 		})
 

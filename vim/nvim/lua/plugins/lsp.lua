@@ -15,6 +15,9 @@ return {
 			})
 
 			require("mason-lspconfig").setup({
+				automatic_enable = {
+					{ exclude = { "stylua" } },
+				},
 				ensure_installed = {
 					"ts_ls",
 					"lua_ls",
@@ -45,6 +48,12 @@ return {
 				},
 			})
 			vim.lsp.enable("lua_ls")
+
+			-- stylua is a formatter, not a language server.
+			-- nvim-lspconfig ships an lsp/stylua.lua that mason-lspconfig
+			-- auto-enables. Lua formatting is already handled by configm,
+			-- so the LSP client is disabled here.
+			vim.lsp.enable("stylua", false)
 
 			-- PS LS using custom config
 			vim.lsp.config("powershell_es", {

@@ -52,24 +52,12 @@ nmap <C-a> gg<S-v>G
 " better escape
 imap jk <Esc>
 
-" surround marked text with ()
-xnoremap <leader>s xi ()<ESC>l"_xP
-" surround marked text with []
-xnoremap <leader>s[ xi []<ESC>l"_xP
-xnoremap <leader>s] xi []<ESC>l"_xP
-" surround marked text with {}
-xnoremap <leader>s{ xi {}<ESC>l"_xP
-xnoremap <leader>s} xi {}<ESC>l"_xP
-
 " terminal
 nmap <C-t> <Action>(ActivateTerminalToolWindow)
 nmap <leader>t <Action>(Terminal.OpenInTerminal)
 
 " Important --> Close Current Buffer with CMD-4 or Control-4 on Windows
 " This allows to close for example the Debugger-Console Windows
-
-" zen-mode
-nmap <C-z> <Action>(ToggleDistractionFreeMode)
 
 " find
 nmap <C-f> <Action>(GotoFile)
@@ -118,8 +106,8 @@ nmap <leader>aM <Action>(ExpandAllRegions)
 nmap <leader>oi <Action>(OptimizeImports)
 
 " code information
-nmap <leader>d <Action>(ShowHoverInfo)
-nmap <leader>e <Action>(ShowErrorDescription)
+nmap <leader>h <Action>(ShowHoverInfo)
+nmap <leader>d <Action>(ShowErrorDescription)
 
 " code navigation
 nmap gd <Action>(GotoDeclaration)
@@ -127,8 +115,8 @@ nmap gi <Action>(GotoImplementation)
 nmap gp <Action>(JumpToLastChange)
 nmap gn <Action>(JumpToNextChange)
 nmap gt <Action>(GotoTest)
-nmap gne <Action>(GotoNextError)
-nmap gpe <Action>(GotoPreviousError)
+nmap gnd <Action>(GotoNextError)
+nmap gpd <Action>(GotoPreviousError)
 nmap gmu <Action>(MethodUp)
 nmap gmd <Action>(MethodDown)
 
@@ -147,12 +135,6 @@ nmap <leader>rx <Action>(ChooseRunConfiguration)
 nmap <leader>rr <Action>(Rerun)
 nmap <leader>rs <Action>(Stop)
 nmap <leader>rt <Action>(RunTests)
-
-" todo
-nmap <leader>to <Action>(ActivateTODOToolWindow)
-
-" configurations
-nmap \\v <Action>(VimActions)
 
 "---------- plugins ----------
 " easy motion

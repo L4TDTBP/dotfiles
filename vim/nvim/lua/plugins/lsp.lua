@@ -61,6 +61,86 @@ return {
 			})
 			vim.lsp.enable("powershell_es")
 
+			-- ltex_plus setup --
+			---------------------
+			-- read a wordlist file (one word per line) into a list, empty if missing
+			local function read_words(path)
+				local words = {}
+				local f = io.open(path, "r")
+				if f then
+					for line in f:lines() do
+						line = vim.trim(line)
+						if line ~= "" then
+							table.insert(words, line)
+						end
+					end
+					f:close()
+				end
+				return words
+			end
+
+			local dict_dir = vim.fn.stdpath("config") .. "/ltex"
+
+			-- Grammer and spell checking for academic writing
+			vim.lsp.config("ltex_plus", {
+				settings = {
+					ltex = {
+						-- Swiss German: expects "ss", not "ß"
+						language = "de-CH",
+						dictionary = {
+							["de-CH"] = read_words(dict_dir .. "/de-CH.txt"),
+							["en-US"] = read_words(dict_dir .. "/en-US.txt"),
+						},
+						additionalRules = {
+							-- stricter style and grammer rules
+							enablePickyRules = true,
+							-- helpts detect false friends between de and en
+							motherTongue = "de-CH",
+						},
+						-- show suggestions as info, not as loud errors
+						diagnosticSeverity = "information",
+					},
+				},
+			})
+			vim.lsp.enable("ltex_plus")
+
+			-- append the word unter the cursor to the German dictionary and reload
+			vim.api.nvim_create_user_command("LtexAddWord", function()
+				local word = vim.fn.expand("<cword>")
+				if word == "" then
+					return
+				end
+
+				vim.fn.mkdir(dict_dir, "p")
+				local file = dict_dir .. "/de-CH.txt"
+				if vim.tbl_contains(read_words(file), word) then
+					vim.notify("Already in dictionary: " .. word)
+					return
+				end
+
+				local f = io.open(file, "a")
+				if f then
+					f:write(word .. "\n")
+					f:close()
+				end
+				vim.notify("Added to LTex dictionary: " .. word)
+
+				-- push the updated wordlist to the running ltex client
+				for _, client in ipairs(vim.lsp.get_clients({ name = "ltex_plus" })) do
+					client.settings = vim.tbl_deep_extend("force", client.settings or {}, {
+						ltex = {
+							dictionary = {
+								["de-CH"] = read_words(dict_dir .. "/de-CH.txt"),
+								["en-US"] = read_words(dict_dir .. "/en-US.txt"),
+							},
+						},
+					})
+					client:notify("workspace/didChangeConfiguration", { settings = client.settings })
+				end
+			end, {})
+
+			-- Keymaps --
+			-------------
 			vim.api.nvim_create_autocmd("LspAttach", {
 				callback = function(args)
 					-- navigation
@@ -119,6 +199,17 @@ return {
 					vim.keymap.set("n", "gpd", function()
 						vim.diagnostic.jump({ count = -1 })
 					end, { buffer = args.buf, desc = "go to previous diagnostic" })
+
+					-- server-specific keymaps
+					local client = vim.lsp.get_client_by_id(args.data.client_id)
+					if client and client.name == "ltex_plus" then
+						vim.keymap.set(
+							"n",
+							"<leader>la",
+							"<cmd>LtexAddWord<cr>",
+							{ buffer = args.buf, desc = "LTeX: add word to dictionary" }
+						)
+					end
 				end,
 			})
 		end,

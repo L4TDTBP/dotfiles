@@ -1,48 +1,39 @@
 return {
 	"saghen/blink.cmp",
 	version = "1.*",
-	event = "InsertEnter",
+	event = "InsertEnter", -- neovim autocmd-event (entering insert mode)
 	dependencies = {
-		-- snippet engine
-		"rafamadriz/friendly-snippets",
+		-- snippet engine used by blink for expansion
+		"L3MON4D3/LuaSnip",
+		-- bridge plus source for vimtex citation and reference completion
+		{ "saghen/blink.compat", version = "2.*", lazy = true, opts = {} },
+		"micangl/cmp-vimtex",
 	},
-	config = function()
-		require("blink.cmp").setup({
-			keymap = {
-				preset = "none",
-				-- navigation in completion menu
-				["<C-j>"] = { "select_next", "fallback" },
-				["<C-k>"] = { "select_prev", "fallback" },
-				-- confirm
-				["<CR>"] = { "accept", "fallback" },
-				-- cancel
-				["<C-e>"] = { "cancel", "fallback" },
-				-- scroll documentation
-				["<C-d>"] = { "scroll_documentation_down", "fallback" },
-				["<C-u>"] = { "scroll_documentation_up", "fallback" },
+	opts = {
+		keymap = { preset = "default" },
+		appearance = {
+			nerd_font_variant = "mono",
+		},
+		-- use LuaSnip as the snippet engine
+		snippets = { preset = "luasnip" },
+		completion = { documentation = { auto_show = false } },
+		sources = {
+			default = { "lsp", "path", "snippets", "buffer" },
+			-- prose-heavy writing: drop the buffer source for tex and md so
+			-- ordinary German words don't clutter the completion menu
+			per_filetype = {
+				tex = { "lsp", "path", "snippets", "vimtex" },
+				md = { "lsp", "path", "snippets" },
 			},
-			completion = {
-				-- show automatically during typing
-				list = {
-					selection = {
-						preselect = true,
-						auto_insert = false,
-					},
-				},
-				-- documentation popup
-				documentation = {
-					auto_show = true,
-					auto_show_delay_ms = 200,
-				},
-				-- ghost text (shows inline preview)
-				ghost_text = {
-					enabled = true,
+			providers = {
+				-- name must match the nvim-cmp source name
+				vimtex = {
+					name = "vimtex",
+					module = "blink.compat.source",
 				},
 			},
-			-- completion sources
-			sources = {
-				default = { "lsp", "path", "snippets", "buffer" },
-			},
-		})
-	end,
+		},
+		fuzzy = { implementation = "prefer_rust_with_warning" },
+	},
+	opts_extend = { "sources.default" },
 }

@@ -13,3 +13,9 @@ vim.opt_local.conceallevel = 2
 -- Move by visual lines, not logical lines, in wrapped text
 vim.keymap.set({ "n", "x" }, "j", "gj", { buffer = true })
 vim.keymap.set({ "n", "x" }, "k", "gk", { buffer = true })
+
+-- Which-Key
+local ok, wk = pcall(require, "which-key")
+if ok then
+	wk.add({ { "<localleader>l", group = "LaTeX", buffer = 0 } })
+end

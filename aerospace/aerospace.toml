@@ -83,7 +83,11 @@ outer.top = [
 # Dialog, should be floating
 [[on-window-detected]]
 if.app-id = 'com.microsoft.StorageExplorer'
-run = ['layout floating', 'move-node-to-workspace W']
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'JabRef'
+run = ['layout floating']
 
 # Normal Rules
 [[on-window-detected]]

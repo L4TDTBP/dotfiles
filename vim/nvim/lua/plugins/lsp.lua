@@ -30,12 +30,17 @@ return {
 			})
 
 			-- LSP using default config
-			vim.lsp.enable("roslyn_ls")
 			vim.lsp.enable("ts_ls")
 			vim.lsp.enable("html")
 			vim.lsp.enable("cssls")
 			vim.lsp.enable("jsonls")
 			vim.lsp.enable("yamlls")
+
+			-- rosly_ls using custom config
+			vim.lsp.enable("roslyn_ls")
+			vim.lsp.config("roslyn_ls", {
+				filetypes = { "razor", "cs" },
+			})
 
 			-- Lua_LS using custom config
 			vim.lsp.config("lua_ls", {

@@ -1,5 +1,8 @@
 local opt = vim.opt
 
+-- title naming
+opt.title = false -- do not rename window-title with name of editing file (important for scratch-paper)
+
 -- row number
 opt.number = true
 opt.relativenumber = true

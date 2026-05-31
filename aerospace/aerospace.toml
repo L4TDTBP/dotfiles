@@ -25,6 +25,9 @@ accordion-padding = 0
 # --- Main Mode ---
 [mode.main.binding]
 
+# scratch-paper
+alt-space = '''exec-and-forget aerospace-scratchpad show kitty -F window-title=scratch-paper || /Applications/kitty.app/Contents/MacOS/kitty --single-instance --instance-group scratchpad -T scratch-paper -d /Users/michael/git/notes zsh -ic "nvim /Users/michael/git/notes/scratch-paper.md"'''
+
 alt-slash = 'layout tiles horizontal vertical'
 alt-comma = 'layout accordion horizontal vertical'
 
@@ -80,6 +83,12 @@ outer.top = [
 ]
 
 # --- Rules ---
+# Scratchpad (scratch-paper)
+[[on-window-detected]]
+if.app-id = 'net.kovidgoyal.kitty'
+if.window-title-regex-substring = 'scratch-paper'
+run = ['layout floating']
+
 # Dialog, should be floating
 [[on-window-detected]]
 if.app-id = 'com.microsoft.StorageExplorer'

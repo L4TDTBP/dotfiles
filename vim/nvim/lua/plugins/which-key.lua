@@ -20,12 +20,15 @@ return {
 
 		-- named groups, for a better overview
 		wk.add({
+			{ "<leader>a", group = "ai" },
 			{ "<leader>f", group = "find" },
 			{ "<leader>d", group = "diagnostics" },
-			{ "<leader>c", group = "code" },
+			{ "<leader>c", group = "code action" },
+			{ "<leader>ca", group = "all code" },
 			{ "<leader>r", group = "refactor" },
 			{ "<leader>gh", group = "git hunk" },
 			{ "<leader>g", group = "git" },
+			{ "<leader>t", group = "tools" },
 			{ "s", group = "split" },
 			{ "sm", group = "move split" },
 			{ "g", group = "go to" },

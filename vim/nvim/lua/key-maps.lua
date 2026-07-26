@@ -79,10 +79,10 @@ map.set("n", "<leader>jq", ":copen<CR>", { noremap = true, desc = "jump to quick
 
 -- code folding --
 ------------------
-map.set("n", "<leader>m", "zc", { desc = "collapse method" })
-map.set("n", "<leader>M", "zo", { desc = "expand method" })
-map.set("n", "<leader>am", "zM", { desc = "collapse all" })
-map.set("n", "<leader>aM", "zR", { desc = "expand all" })
+map.set("n", "<leader>cm", "zc", { desc = "collapse method" })
+map.set("n", "<leader>cM", "zo", { desc = "expand method" })
+map.set("n", "<leader>cam", "zM", { desc = "collapse all" })
+map.set("n", "<leader>caM", "zR", { desc = "expand all" })
 
 -- Terminal Mode --
 -------------------

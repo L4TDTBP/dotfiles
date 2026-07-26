@@ -4,3 +4,6 @@ Tnanzes
 Kapitel
 Bastani
 Prather
+MLOps
+IdP
+AuthnRequest

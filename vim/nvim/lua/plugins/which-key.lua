@@ -20,7 +20,6 @@ return {
 
 		-- named groups, for a better overview
 		wk.add({
-			{ "<leader>a", group = "ai" },
 			{ "<leader>f", group = "find" },
 			{ "<leader>d", group = "diagnostics" },
 			{ "<leader>c", group = "code action" },

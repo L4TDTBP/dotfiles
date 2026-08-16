@@ -66,3 +66,7 @@ opt.foldmethod = "expr"
 opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 opt.foldenable = true
 opt.foldlevel = 99
+
+-- better diff handling
+opt.diffopt:append("linematch:60")
+opt.diffopt:append("algorithm:histogram")

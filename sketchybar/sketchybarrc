@@ -36,12 +36,11 @@ sketchybar --default "${default[@]}"
 
 ##### Left: Apple | Front App | Mic | Workspaces #####
 
-
 ##### Integrate aerospace workspaces
 
 sketchybar --add event aerospace_workspace_change
 
-for sid in T P C W S B M F; do
+for sid in T P C W A S B M F; do
     sketchybar --add item space.$sid left \
         --subscribe space.$sid aerospace_workspace_change \
         --set space.$sid \

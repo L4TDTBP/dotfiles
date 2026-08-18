@@ -10,21 +10,22 @@ return {
 				typescriptreact = { "prettierd", "prettier", stop_after_first = true },
 				javascript = { "prettierd", "prettier", stop_after_first = true },
 				javascriptreact = { "prettierd", "prettier", stop_after_first = true },
-				json = { "prettier" },
-				html = { "prettier" },
-				css = { "prettier" },
-				yaml = { "prettier" },
-				markdown = { "prettier" },
-				csharp = { "csharpier" },
+				json = { "prettierd", "prettier", stop_after_first = true },
+				html = { "prettierd", "prettier", stop_after_first = true },
+				css = { "prettierd", "prettier", stop_after_first = true },
+				yaml = { "prettierd", "prettier", stop_after_first = true },
+				markdown = { "prettierd", "prettier", stop_after_first = true },
+				-- cs: intentionally not listed, Roslyn LSP formats via fallback
+				-- using the .editorconfig rules
 			},
 			-- format on save
 			format_on_save = {
 				timeout_ms = 500,
-				lsp_fallback = true,
+				lsp_format = "fallback",
 			},
 		})
 
-		-- manuelles formatieren mit keymap
+		-- manual format keymap
 		vim.keymap.set("n", "<leader>cf", function()
 			require("conform").format({ async = true, lsp_fallback = true })
 		end, { desc = "format buffer" })

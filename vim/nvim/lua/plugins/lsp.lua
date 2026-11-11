@@ -89,14 +89,19 @@ return {
 					)
 
 					-- actions
-					vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = args.buf, desc = "rename symbol" })
+					vim.keymap.set(
+						"n",
+						"<leader>crn",
+						vim.lsp.buf.rename,
+						{ buffer = args.buf, desc = "rename symbol" }
+					)
 					vim.keymap.set(
 						"n",
 						"<leader>ca",
 						vim.lsp.buf.code_action,
 						{ buffer = args.buf, desc = "code action" }
 					)
-					vim.keymap.set("n", "<leader>oi", function()
+					vim.keymap.set("n", "<leader>coi", function()
 						vim.lsp.buf.code_action({
 							apply = true,
 							context = {
@@ -109,14 +114,14 @@ return {
 					-- diagnostics
 					vim.keymap.set(
 						"n",
-						"<leader>dd",
+						"<leader>cd", -- go to diagnostics-info
 						vim.diagnostic.open_float,
 						{ buffer = args.buf, desc = "show diagnostic" }
 					)
-					vim.keymap.set("n", "gnd", function()
+					vim.keymap.set("n", "gnd", function() -- go to next diagnostic
 						jump_diagnostic(true)
 					end, { buffer = args.buf, desc = "go to next diagnostic (severity priority)" })
-					vim.keymap.set("n", "gpd", function()
+					vim.keymap.set("n", "gpd", function() -- go to previous diagnostic
 						jump_diagnostic(false)
 					end, { buffer = args.buf, desc = "go to previous diagnostic (severity priority)" })
 				end,

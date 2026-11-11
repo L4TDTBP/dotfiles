@@ -21,16 +21,15 @@ return {
 		-- named groups, for a better overview
 		wk.add({
 			{ "<leader>f", group = "find" },
-			{ "<leader>d", group = "diagnostics" },
+			{ "<leader>d", group = "Debugger" },
+			{ "<leader>r", group = "refactor" },
+			{ "<leader>g", group = "go to" },
+			{ "<leader>t", group = "tools" },
 			{ "<leader>c", group = "code action" },
 			{ "<leader>ca", group = "all code" },
-			{ "<leader>r", group = "refactor" },
-			{ "<leader>gh", group = "git hunk" },
-			{ "<leader>g", group = "git" },
-			{ "<leader>t", group = "tools" },
+			{ "g", group = "go to" },
 			{ "s", group = "split" },
 			{ "sm", group = "move split" },
-			{ "g", group = "go to" },
 			{ "]", group = "next" },
 			{ "[", group = "previous" },
 		})

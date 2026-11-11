@@ -24,11 +24,33 @@ return {
 				desc = "continue",
 			},
 			{
-				"<leader>dt",
+				"<leader>du",
 				function()
 					require("dap-view").toggle()
 				end,
-				desc = "toggle dap view",
+				desc = "debug UI",
+			},
+			{
+				"<leader>dq",
+				function()
+					require("dap").terminate()
+				end,
+				desc = "terminate",
+			},
+			{
+				"<leader>dh",
+				function()
+					require("dap.ui.widgets").hover()
+				end,
+				mode = { "n", "v" },
+				desc = "hover variable",
+			},
+			{
+				"<leader>dr",
+				function()
+					require("dap").repl.toggle()
+				end,
+				desc = "toggle repl",
 			},
 			{
 				"<Down>",
@@ -58,16 +80,13 @@ return {
 				end,
 				desc = "restart frame",
 			},
-			{
-				"<leader>dq",
-				function()
-					require("dap").terminate()
-				end,
-				desc = "terminate",
-			},
 		},
 		config = function()
-			require("dap").set_log_level("TRACE")
+			require("dap").set_log_level("INFO") -- use "TRACE" for debugging
+			require("dap").defaults.fallback.external_terminal = {
+				command = "kitty",
+				args = { "--hold", "--" },
+			}
 			require("dap-powershell").setup()
 			require("dap-view").setup({
 				winbar = {

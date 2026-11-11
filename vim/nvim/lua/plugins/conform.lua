@@ -26,7 +26,7 @@ return {
 		})
 
 		-- manual format keymap
-		vim.keymap.set("n", "<leader>cf", function()
+		vim.keymap.set("n", "cf", function()
 			require("conform").format({ async = true, lsp_fallback = true })
 		end, { desc = "format buffer" })
 	end,

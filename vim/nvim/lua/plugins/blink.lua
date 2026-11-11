@@ -10,13 +10,18 @@ return {
 		"micangl/cmp-vimtex",
 	},
 	opts = {
-		keymap = { preset = "default" },
+		keymap = { preset = "enter" },
+		completion = {
+			-- nothing is selected by default, so <CR> inserts a newline
+			-- unless an item was explicitly selected
+			list = { selection = { preselect = false, auto_insert = true } },
+			documentation = { auto_show = false },
+		},
 		appearance = {
 			nerd_font_variant = "mono",
 		},
 		-- use LuaSnip as the snippet engine
 		snippets = { preset = "luasnip" },
-		completion = { documentation = { auto_show = false } },
 		sources = {
 			default = { "lsp", "path", "snippets", "buffer" },
 			-- prose-heavy writing: drop the buffer source for tex and md so

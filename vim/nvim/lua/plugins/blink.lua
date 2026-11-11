@@ -11,19 +11,13 @@ return {
 	},
 	opts = {
 		keymap = { preset = "enter" },
-		completion = {
-			-- nothing is selected by default, so <CR> inserts a newline
-			-- unless an item was explicitly selected
-			list = { selection = { preselect = false, auto_insert = true } },
-			documentation = { auto_show = false },
-		},
 		appearance = {
 			nerd_font_variant = "mono",
 		},
 		-- use LuaSnip as the snippet engine
 		snippets = { preset = "luasnip" },
 		sources = {
-			default = { "lsp", "path", "snippets", "buffer" },
+			default = { "lazydev", "lsp", "path", "snippets", "buffer" },
 			-- prose-heavy writing: drop the buffer source for tex and md so
 			-- ordinary German words don't clutter the completion menu
 			per_filetype = {
@@ -35,6 +29,12 @@ return {
 				vimtex = {
 					name = "vimtex",
 					module = "blink.compat.source",
+				},
+				lazydev = {
+					name = "lazydev",
+					module = "lazydev.integrations.blink",
+					-- make lazydev completions top priority
+					score_offset = 100,
 				},
 			},
 		},

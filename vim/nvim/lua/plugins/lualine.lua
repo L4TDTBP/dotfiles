@@ -22,7 +22,7 @@ return {
 				lualine_c = {
 					{
 						function()
-							local name = vim.fn.expand("%")
+							local name = vim.fn.expand("%:.")
 							if name:match("^oil://") then
 								return name:gsub("^oil://", "")
 							end
@@ -42,8 +42,10 @@ return {
 					},
 				},
 				lualine_y = {
-					"filetype",
-					icon_only = true,
+					{
+						"filetype",
+						icon_only = true,
+					},
 				},
 				lualine_z = {
 					{

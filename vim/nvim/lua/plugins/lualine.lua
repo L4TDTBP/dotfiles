@@ -7,6 +7,7 @@ return {
 				theme = "kanagawa",
 				component_separators = { left = "", right = "" },
 				section_separators = { left = "", right = "" },
+				globalstatus = true,
 			},
 			sections = {
 				lualine_a = {
@@ -36,19 +37,14 @@ return {
 							if #clients == 0 then
 								return ""
 							end
-							local names = {}
-							for _, client in ipairs(clients) do
-								table.insert(names, client.name)
-							end
-							return "􀥎  " .. table.concat(names, ", ")
+							return string.format("􀥎  %d lsps", #clients)
 						end,
 					},
-					{
-						"filetype",
-						icon_only = true,
-					},
 				},
-				lualine_y = {},
+				lualine_y = {
+					"filetype",
+					icon_only = true,
+				},
 				lualine_z = {
 					{
 						function()
@@ -57,13 +53,6 @@ return {
 					},
 				},
 			},
-		})
-
-		-- Hide lualine in terminal buffers (like pses)
-		vim.api.nvim_create_autocmd("TermOpen", {
-			callback = function()
-				vim.opt_local.laststatus = 0
-			end,
 		})
 	end,
 }

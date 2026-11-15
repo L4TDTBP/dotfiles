@@ -19,3 +19,9 @@
 - Beschränke dich bei Verbesserungen auf Rechtschreibung und Grammatik.
 - Verändere nicht die Semantik.
 - Weise auf inhaltliche oder stilistische Schwächen hin, ohne sie zu ändern.
+
+# Mathematik
+
+- Schreibe bei Mathematik Aufgaben niemals die Lösung auf.
+- Wenn ich nicht weiss wie eine Aufgabe angegangen werden soll, liefere mir die theoretischen
+  Grundkenntnisse, die ich mir aneignen muss, um selber auf den richtigen Lösungsweg zu kommen.

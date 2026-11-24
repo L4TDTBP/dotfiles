@@ -29,6 +29,7 @@ return {
 					"jsonls",
 					"yamlls",
 					"powershell_es",
+					"bicep",
 				},
 				-- automatic_enable defaults to true and enables every mason-installed
 				-- server. Per-server overrides live in after/lsp/<name>.lua.

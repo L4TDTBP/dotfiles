@@ -58,6 +58,7 @@
       "Bash(az logout *)"
     ]
   },
+  "model": "claude-fable-5-2",
   "enabledPlugins": {
     "postman@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": true
@@ -65,6 +66,9 @@
   "effortLevel": "high",
   "modelSettings": {
     "claude-opus-5-5": {
+      "effortLevel": "high"
+    },
+    "claude-fable-5-2": {
       "effortLevel": "high"
     }
   },
